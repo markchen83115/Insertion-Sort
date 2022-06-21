@@ -13,8 +13,9 @@ public class SortingAlgorithm {
         System.out.println("Before:");
         printArray(numbers);
 
+        //bubbleSort(numbers);
         //insertionSort(numbers);
-        bubbleSort(numbers);
+        selectionSort(numbers);
 
         System.out.println("After:");
         printArray(numbers);
@@ -54,6 +55,23 @@ public class SortingAlgorithm {
                 }
             }
         }
-        
+    }
+
+    private static void selectionSort (int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            int min = array[i];
+            int minIndex = i;
+            for (int j = i+1; j < array.length; j++) {
+                if (array[j] < min) {
+                    min = array[j];
+                    minIndex = j;
+                }
+            }
+
+            //swap
+            int tmp = array[i];
+            array[i] = min;
+            array[minIndex] = tmp;
+        }
     }
 }
