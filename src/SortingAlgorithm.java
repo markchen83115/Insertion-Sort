@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class InsertionSort {
+public class SortingAlgorithm {
     public static void main(String[] args) throws Exception {
         
         Random random = new Random();
@@ -13,7 +13,8 @@ public class InsertionSort {
         System.out.println("Before:");
         printArray(numbers);
 
-        insertionSort(numbers);
+        //insertionSort(numbers);
+        bubbleSort(numbers);
 
         System.out.println("After:");
         printArray(numbers);
@@ -36,5 +37,23 @@ public class InsertionSort {
             }
             array[j+1] = currentValue;
         }
+    }
+
+    private static void bubbleSort (int[] array) {
+        int tmp = 0;
+        boolean swaped = true;
+        while (swaped) {
+            swaped = false;
+
+            for (int i = 0; i < array.length - 1; i++) {
+                if (array[i] > array[i+1]) {
+                    tmp = array[i];
+                    array[i] = array[i+1];
+                    array[i+1] = tmp;
+                    swaped = true;
+                }
+            }
+        }
+        
     }
 }
