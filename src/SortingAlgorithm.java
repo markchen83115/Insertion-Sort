@@ -4,7 +4,7 @@ public class SortingAlgorithm {
     public static void main(String[] args) throws Exception {
         
         Random random = new Random();
-        int[] numbers = new int[10];
+        int[] numbers = new int[100];
 
         for (int i = 0; i < numbers.length; i++) {
             numbers[i] = random.nextInt(1000);
@@ -15,7 +15,8 @@ public class SortingAlgorithm {
 
         //bubbleSort(numbers);
         //insertionSort(numbers);
-        selectionSort(numbers);
+        //selectionSort(numbers);
+        mergeSort(numbers);
 
         System.out.println("After:");
         printArray(numbers);
@@ -72,6 +73,49 @@ public class SortingAlgorithm {
             int tmp = array[i];
             array[i] = min;
             array[minIndex] = tmp;
+        }
+    }
+
+    private static void mergeSort (int[] array) {
+        int length = array.length;
+        if (length <=1)
+            return;
+
+        int midIndex = length / 2;
+        int[] leftArray = new int[midIndex];
+        int[] rightArray = new int[length - midIndex];
+
+        for (int i = 0; i < midIndex; i++) {
+            leftArray[i] = array[i];
+        }
+        for (int i = midIndex; i < length; i++) {
+            rightArray[i - midIndex] = array[i];
+        }
+
+        mergeSort(leftArray);
+        mergeSort(rightArray);
+
+        merge(array, leftArray, rightArray);
+        
+    }
+
+    private static void merge (int[] array, int[] leftArray, int[] rightArray) {
+        int leftLen = leftArray.length;
+        int rightLen = rightArray.length;
+        int i = 0, j = 0, k = 0;
+
+        while (i < leftLen && j < rightLen) {
+            if (leftArray[i] <= rightArray[j]) {
+                array[k++] = leftArray[i++];
+            } else {
+                array[k++] = rightArray[j++];
+            }
+        }
+        while (i < leftLen) {
+            array[k++] = leftArray[i++];
+        }
+        while (j < rightLen) {
+            array[k++] = rightArray[j++];
         }
     }
 }
