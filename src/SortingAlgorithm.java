@@ -16,7 +16,8 @@ public class SortingAlgorithm {
         //bubbleSort(numbers);
         //insertionSort(numbers);
         //selectionSort(numbers);
-        mergeSort(numbers);
+        //mergeSort(numbers);
+        quickSort(numbers, 0 , numbers.length-1);
 
         System.out.println("After:");
         printArray(numbers);
@@ -117,5 +118,32 @@ public class SortingAlgorithm {
         while (j < rightLen) {
             array[k++] = rightArray[j++];
         }
+    }
+
+    private static void quickSort(int[] array, int begin, int end) {
+        if (end <= begin)
+            return;
+        int pivit = partition(array, begin, end);
+        quickSort(array, begin, pivit-1);
+        quickSort(array, pivit+1, end);
+    }
+
+    private static int partition(int[] array, int begin, int end) {
+        int pivit = end;
+        int counter = begin;
+        for (int i = begin; i < end; i++) {
+            if (array[i] < array[pivit]) {
+                int tmp = array[counter];
+                array[counter] = array[i];
+                array[i] = tmp;
+                counter++;
+            }
+        }
+
+        int tmp = array[pivit];
+        array[pivit] = array[counter];
+        array[counter] = tmp;
+
+        return counter;
     }
 }
