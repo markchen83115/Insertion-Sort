@@ -4,10 +4,10 @@ public class SortingAlgorithm {
     public static void main(String[] args) throws Exception {
         
         Random random = new Random();
-        int[] numbers = new int[100];
+        int[] numbers = new int[10];
 
         for (int i = 0; i < numbers.length; i++) {
-            numbers[i] = random.nextInt(1000);
+            numbers[i] = random.nextInt(100);
         }
 
         System.out.println("Before:");
@@ -17,7 +17,8 @@ public class SortingAlgorithm {
         //insertionSort(numbers);
         //selectionSort(numbers);
         //mergeSort(numbers);
-        quickSort(numbers, 0 , numbers.length-1);
+        //quickSort(numbers, 0 , numbers.length-1);
+        heapSort(numbers);
 
         System.out.println("After:");
         printArray(numbers);
@@ -145,5 +146,44 @@ public class SortingAlgorithm {
         array[counter] = tmp;
 
         return counter;
+    }
+
+    private static void heapSort(int[] array) {
+        if (array.length == 0) 
+            return;
+
+        int length = array.length;
+        for (int i = length / 2 - 1; i >= 0; i--) {
+            heapify(array, length, i);
+        }
+
+        for (int i = length - 1; i > 0; i--) {
+            int tmp = array[0];
+            array[0] = array[i];
+            array[i] = tmp;
+
+            heapify(array, i, 0);
+        }
+    }
+
+    private static void heapify(int[] array, int length, int i) {
+        int leftChild = i * 2 + 1;
+        int rightChild = i * 2 + 2;
+        int largest = i;
+
+        if (leftChild < length && array[leftChild] > array[largest]) {
+            largest = leftChild;
+        }
+
+        if (rightChild < length && array[rightChild] > array[largest]) {
+            largest = rightChild;
+        }
+
+        if (i != largest) {
+            int tmp = array[i];
+            array[i] = array[largest];
+            array[largest] = tmp;
+            heapify(array, length, largest);
+        }
     }
 }
